@@ -1,9 +1,8 @@
 <h2>Dolgozók</h2>
 
-<label for="actCity">Szűrés településre: </label>
-<input type="text" [(ngModel)]="actCity">
+<button class="btn btn-primary" (click)="toggleFilter()">Szűrés</button>
 
-<table>
+<table class="table table-striped table-info">
     <thead>
         <tr>
             <th>ID</th>
@@ -11,15 +10,27 @@
             <th>Település</th>
             <th>Fizetés</th>
         </tr>
+        @if(isFilterVisible) {
+        <tr>
+            <th></th>
+            <th>
+                <input type="text" [(ngModel)]="actName">
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="actCity">
+            </th>
+            <th></th>
+        </tr>
+        }
     </thead>
     <tbody>
-        @for(emp of employees | empfilter:actCity; track emp.id) {
-            <tr>
-                <td>{{ emp.id }}</td>
-                <td>{{ emp.name }}</td>
-                <td>{{ emp.city }}</td>
-                <td>{{ emp.salary }}</td>
-            </tr>
+        @for(emp of employees | empfilter:{ name: actName, city: actCity }; track emp.id) {
+        <tr>
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.city }}</td>
+            <td>{{ emp.salary }}</td>
+        </tr>
         }
     </tbody>
 </table>

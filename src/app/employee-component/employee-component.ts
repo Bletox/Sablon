@@ -9,8 +9,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './employee-component.html',
 })
 export class EmployeeComponent {
+  toggleFilter() {
+    this.isFilterVisible
+  }
 
-  actCity! : string;
+  actName!: string;
+  actCity!: string;
+  isFilterVisible = true
 
   employees = [
     { id: 1, name: "Peres Béla", city: "Pécs", salary: 395 },
